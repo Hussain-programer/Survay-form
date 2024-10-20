@@ -1,0 +1,540 @@
+
+    
+<html>
+<head>
+    <title>Survey</title>
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+  
+</head>
+<body class="bg-white p-6">
+    <div id="root"></div>
+    <script type="text/babel">
+        function App() {
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = Object.fromEntries(formData.entries());
+
+                fetch('http://localhost:3000/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            };
+
+            return (
+                <div className="max-w-lg mx-auto p-6 border rounded-lg shadow-md">
+                    <div className="text-center mb-6">
+                        <h1 className="text-3xl font-bold">Demo Form</h1>
+                        <p className="text-lg">Survey</p>
+                        <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                        <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                    <div className="mb-6">
+                        <h2 className="text-xl font-bold border-b pb-2">Personal Information</h2>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Name:</label>
+                            <input type="text" className="w-full border rounded p-2" />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Age:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="age" className="mr-2" /> Under 18
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="age" className="mr-2" /> 18-24
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="age" className="mr-2" /> 25-34
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="age" className="mr-2" /> 35-44
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="age" className="mr-2" /> 45+
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Gender:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="gender" className="mr-2" /> Male
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="gender" className="mr-2" /> Female
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="gender" className="mr-2" /> Non-binary
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Marital Status:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="marital" className="mr-2" /> Single
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="marital" className="mr-2" /> Married
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="marital" className="mr-2" /> Divorced
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="marital" className="mr-2" /> Widowed
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Education Level:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="education" className="mr-2" /> High School Diploma or GED
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="education" className="mr-2" /> Some College
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="education" className="mr-2" /> Bachelor's Degree
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="education" className="mr-2" /> Master's Degree or Higher
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Ethnicity:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="ethnicity" className="mr-2" /> White
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="ethnicity" className="mr-2" />African American
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="ethnicity" className="mr-2" /> Hispanic or Latino
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="ethnicity" className="mr-2" /> Asian
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Religion:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="religion" className="mr-2" /> Christian
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="religion" className="mr-2" /> Muslim
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="religion" className="mr-2" /> Jewish
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="religion" className="mr-2" /> Buddhist
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Date of Birth:</label>
+                            <input type="text" className="w-full border rounded p-2" placeholder="e.g., 01/01/1990" />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Place of Birth:</label>
+                            <input type="text" className="w-full border rounded p-2" placeholder="City, State/Province, Country" />
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Citizenship:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="citizenship" className="mr-2" /> Pakistani
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="citizenship" className="mr-2" /> US citizen
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="citizenship" className="mr-2" /> Indian
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="citizenship" className="mr-2" /> Britsh citizen
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="mt-4">
+                                <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                                <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                                <h2 className="text-xl font-bold border-b pb-2">Occupation</h2>
+                                <label className="block text-sm font-medium mb-1">Industry:</label>
+                                <div className="flex flex-wrap gap-2">
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Industry" className="mr-2" /> Technology
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Industry" className="mr-2" /> Healthcare
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Industry" className="mr-2" /> Education
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Industry" className="mr-2" /> Manufacturing
+                                    </label>
+                                </div>
+                                <label className="block text-sm font-medium mb-1">Job Title:</label>
+                                <div className="flex flex-wrap gap-2">
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Job" className="mr-2" /> Software Engineer
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Job" className="mr-2" /> Doctor
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Job" className="mr-2" /> Teacher
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Job" className="mr-2" /> Mechanic
+                                    </label>
+                                </div>
+                                <label className="block text-sm font-medium mb-1">Years of Experience:</label>
+                                <div className="flex flex-wrap gap-2">
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Experience" className="mr-2" /> 0-5 years
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Experience" className="mr-2" /> 6-10 years
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Experience" className="mr-2" /> 11-15 years
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Experience" className="mr-2" /> 16+ years
+                                    </label>
+                                </div>
+                                <label className="block text-sm font-medium mb-1">Employment Status:</label>
+                                <div className="flex flex-wrap gap-2">
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Employment-Status" className="mr-2" /> Full-time
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Employment-Status" className="mr-2" /> Part-time
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Employment-Status" className="mr-2" /> Self-employed
+                                    </label>
+                                    <label className="flex items-center">
+                                        <input type="radio" name="Employment-Status" className="mr-2" />Unemployed
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                            <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                            <h2 className="text-xl font-bold border-b pb-2">Income Level</h2>
+                            <label className="block text-sm font-medium mb-1">Source of Income:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="source-of-income" className="mr-2" /> Salary
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="source-of-income" className="mr-2" /> Self-employment
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="source-of-income" className="mr-2" /> Investment
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="source-of-income" className="mr-2" /> Govt. benefits
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Net Worth:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="net-worth" className="mr-2" />100,000
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="net-worth" className="mr-2" /> 500,000
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="net-worth" className="mr-2" /> 1000,000
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="net-worth" className="mr-2" /> 3,000,000
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Savings Rate:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Savings" className="mr-2" /> 10%
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Savings" className="mr-2" /> 10-20%
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Savings" className="mr-2" /> 21-30%
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Savings" className="mr-2" /> 30%+
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Investment Portfolio:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Investment" className="mr-2" /> Stocks
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Investment" className="mr-2" /> Bonds
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Investment" className="mr-2" /> Real estate
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Investment" className="mr-2" />Cash
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Debt Level:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Debt" className="mr-2" /> No debt
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Debt" className="mr-2" /> Low debt
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Debt" className="mr-2" /> Moderate debt
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Debt" className="mr-2" />High debt
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                            <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                            <h2 className="text-xl font-bold border-b pb-2">Health</h2>
+                            <label className="block text-sm font-medium mb-1">Overall Health Status:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="overall-health" className="mr-2" /> Excellent
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="overall-health" className="mr-2" /> Good
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="overall-health" className="mr-2" /> Fair
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="overall-health" className="mr-2" /> Poor
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Chronic Conditions:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Chronic" className="mr-2" />Heart disease
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Chronic" className="mr-2" /> Diabetes
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Chronic" className="mr-2" /> Arthritis
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Chronic" className="mr-2" /> Asthma
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Disabilities:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Disabilities" className="mr-2" /> Visual
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Disabilities" className="mr-2" />Hearing
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Disabilities" className="mr-2" /> Physical
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Disabilities" className="mr-2" /> Cognitive
+                                </label>
+                            </div>
+                            <label className="block text-sm font-medium mb-1">Insurance Coverage:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="Insurance" className="mr-2" /> Yes, private
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Insurance" className="mr-2" /> Yes, government
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Insurance" className="mr-2" /> No
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="Insurance" className="mr-2" />Other
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                        <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                        <h2 className="text-xl font-bold border-b pb-2">Household Information</h2>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Number of people in household:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="people" className="mr-2" /> 1
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="people" className="mr-2" /> 2
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="people" className="mr-2" /> 3
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="people" className="mr-2" /> 4
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="houspeopleehold" className="mr-2" /> 5 or more
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Type of Residence:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="residence" className="mr-2" /> House
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="residence" className="mr-2" /> Apartment
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="residence" className="mr-2" /> Condominium
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="residence" className="mr-2" /> Other
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Length of Residence:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="length" className="mr-2" /> Less than 1 year
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="length" className="mr-2" /> 1-5 years
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="length" className="mr-2" /> 6-10 years
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="length" className="mr-2" /> 11+ years
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Homeownership Status:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="homeownership" className="mr-2" /> Owner
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="homeownership" className="mr-2" /> Renter
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="homeownership" className="mr-2" /> Other
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Number of Bedrooms:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="bedrooms" className="mr-2" /> 1 bedroom
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="bedrooms" className="mr-2" /> 2 bedrooms
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="bedrooms" className="mr-2" /> 3 bedrooms
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="bedrooms" className="mr-2" /> 4+ bedrooms
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Number of Bathrooms:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="bathrooms" className="mr-2" /> 1 bathroom
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="bathrooms" className="mr-2" /> 2 bathrooms
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="bathrooms" className="mr-2" /> 3+ bathrooms
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Presence of Children:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="children" className="mr-2" /> Yes
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="children" className="mr-2" /> No
+                                </label>
+                            </div>
+                        </div>
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium mb-1">Presence of Pets:</label>
+                            <div className="flex flex-wrap gap-2">
+                                <label className="flex items-center">
+                                    <input type="radio" name="pets" className="mr-2" /> Yes
+                                </label>
+                                <label className="flex items-center">
+                                    <input type="radio" name="pets" className="mr-2" /> No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-2 border-t-4 border-red-700 w-160 mx-auto"></div>
+                    <div className="mt-2 border-t-4 border-red-500 w-80 mx-auto"></div>
+                    <div className="text-center  mt-4">
+
+        <button type="submit" className="bg-red-500 text-white px-4 py-2 rounded">Submit</button>
+    </div>
+</form>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
